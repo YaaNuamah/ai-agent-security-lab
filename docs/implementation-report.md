@@ -698,15 +698,96 @@ Subject to a successful pilot, implement the zone as a hybrid experience centere
 
 ## 14. Future Development
 
-Consider advanced challenges, additional equipment, industry involvement, sponsorship, a Road to NESTCON pilot, year-round community use, and future independent-village potential.
+### 14.1 Phased Development
+
+The Agent Lab should grow only when evidence from the previous phase supports additional complexity.
+
+| Phase | Scope | Decision evidence |
+| --- | --- | --- |
+| Phase 1 Research prototype | One local workflow, synthetic alerts, mock evidence and tools, policy gate, approval, and audit log | Functional and adversarial tests pass |
+| Phase 2 Road to NESTCON pilot | Two stations, 8–12 participants, full reset and offline testing | Section 13 go/no-go criteria are met |
+| Phase 3 NESTCON delivery | Hybrid first win, guided lab, clinic, and optional challenge | Approved staffing, capacity, cost, compliance, and venue plan |
+| Phase 4 Community lab | Reusable workshop package, facilitator training, and periodic practice events | Sustained demand, maintainers, funding, and safe update process |
+| Phase 5 Expanded AI security village | Multiple agent scenarios, red/blue challenges, research demonstrations, and industry participation | Independent governance, infrastructure, sponsorship, and mature safety program |
+
+### 14.2 Additional Challenges
+
+Future versions could introduce:
+
+- A phishing-triage agent that separates message content from authorized analyst instructions.
+- A cloud-configuration review agent with read-only tools and evidence provenance.
+- A vulnerability-management agent that prioritizes findings without executing remediation.
+- A multi-agent scenario demonstrating confused-deputy and inter-agent trust problems.
+- A supply-chain exercise involving a malicious or altered tool description.
+- A detection-engineering exercise using audit events to identify agent misuse.
+- A secure-code review activity focused on typed tool contracts and authorization checks.
+
+Every new scenario should pass threat modeling, authorization, data, isolation, reset, and facilitator review before participant use. Offensive capability must remain bounded to event-owned targets.
+
+### 14.3 Industry and Academic Involvement
+
+Potential partners could contribute loaned equipment, venue infrastructure, facilitator time, synthetic scenarios, technical review, prizes, or funding. Sponsor involvement should not grant access to participant data or convert the lab into a product demonstration. Content, scoring, safety decisions, and findings should remain under NESTCON governance.
+
+Universities and training communities could support pilot participants, usability research, facilitator development, and evaluation. Any formal research involving participants would require an appropriate ethics and consent review separate from ordinary event feedback.
+
+### 14.4 Sustainable Community Use
+
+To support year-round use, the team should maintain:
+
+- A versioned facilitator runbook and participant guide.
+- Reproducible station images and checksums.
+- A documented update and security-review process.
+- A regression suite for benign and adversarial cases.
+- A vulnerability-reporting and coordinated-fix process.
+- A training pathway for new facilitators.
+- An equipment inventory and maintenance schedule.
+- De-identified aggregate learning and operational metrics.
+
+### 14.5 Independent Village Potential
+
+An independent AI Security Village may be justified if repeated pilots demonstrate sustained participation, enough distinct activities, reliable staffing, safe infrastructure, and long-term sponsorship. Until then, the Agent Lab should remain a focused zone with a small number of well-tested experiences rather than expand faster than its operational controls.
 
 ## 15. Sources and References
 
-List every source, its type, link or reference, and the information used. Keep working notes in the research log.
+The working [research log](research-log.md) records what information each source contributed and its limitations. The following references support this report.
+
+1. AI Village. [AI security tested in public](https://aivillage.org/). Official program site describing hands-on AI security education, red-team exercises, workshops, events, and open resources. Accessed 19 September 2026.
+2. AI Village. [AI Village at DEF CON announces largest-ever public Generative AI Red Team](https://aivillage.org/blog/generative-red-team/). Official 2023 event announcement describing supplied laptops, timed model access, participant rules, and CTF-style scoring. Accessed 19 September 2026.
+3. AI Village. [AI Village at DEF CON 32](https://aivillage.org/events/defcon-32/). Official event schedule showing training workshops, demonstrations, and generative red-team activities. Accessed 19 September 2026.
+4. AI Village. [AI Village at DEF CON 34](https://aivillage.org/events/defcon-34/). Official event page describing a sandboxed agentic-security competition and novice-friendly local-agent demonstration. Accessed 19 September 2026.
+5. OWASP GenAI Security Project. [OWASP Top 10 for Agentic Applications 2026](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/). Agentic AI risk framework used to identify goal hijacking, tool misuse, identity and privilege abuse, and related risks. Published 9 December 2025.
+6. OWASP GenAI Security Project. [LLM06 2025 Excessive Agency](https://genai.owasp.org/llmrisk/llm062025-excessive-agency/). Guidance on harmful actions enabled by excessive functionality, permissions, or autonomy. Accessed 19 September 2026.
+7. MITRE. [Adversarial Threat Landscape for Artificial Intelligence Systems ATLAS](https://atlas.mitre.org/). Knowledge base of adversary tactics and techniques for AI systems. Accessed 19 September 2026.
+8. MITRE. [SAFE AI Framework](https://atlas.mitre.org/pdf-files/SAFEAI_Full_Report.pdf). Source used for indirect prompt-injection and agent/plugin threat context. Accessed 19 September 2026.
+9. National Institute of Standards and Technology. [Artificial Intelligence Risk Management Framework AI RMF 1.0](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf). NIST AI 100-1, January 2023.
+10. National Institute of Standards and Technology. [Artificial Intelligence Risk Management Framework Generative Artificial Intelligence Profile](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf). NIST AI 600-1, July 2024.
+11. National Institute of Standards and Technology. [NIST AI RMF Playbook](https://www.nist.gov/itl/ai-risk-management-framework/nist-ai-rmf-playbook). Suggested actions for Govern, Map, Measure, and Manage outcomes. Accessed 19 September 2026.
+12. Ghana Cyber Security Authority. [Cybersecurity Act 2020 Act 1038](https://www.csa.gov.gh/resources/cybersecurity_Act_2020%28Act_1038%29.pdf). Official text establishing and defining the mandate of the Cyber Security Authority.
+13. Ghana Cyber Security Authority. [Resources](https://www.csa.gov.gh/resources.php). Official collection listing the Cybersecurity Act, Data Protection Act, Electronic Transactions Act, national policy, and related materials. Accessed 19 September 2026.
+14. Ghana Cyber Security Authority. [Licensing and Accreditation Frequently Asked Questions](https://www.csa.gov.gh/licensing-and-accreditation-faq). Official guidance identifying cybersecurity training among services covered by the current regime. Accessed 19 September 2026.
+15. National Information Technology Agency Ghana. [Electronic Transactions Act 2008 Act 772](https://nita.gov.gh/wp-content/uploads/2017/12/Electronic-Transactions-Act-772.pdf). Officially hosted legislation relevant to electronic records, protected systems, and automated transactions.
+
+These sources inform technical and implementation planning. They do not replace event authorization, product-specific security review, or qualified legal and regulatory advice.
 
 ## 16. Executive Summary
 
-Limit this section to one page. State the content, what it is, why it belongs in the zone, proposed participant experience, major resources, staffing, complexity, cost, and final recommendation.
+**Content:** Build-a-Bot Cyber Agent and Agent Under Attack
+
+**Zone:** Z2 Agent Lab
+
+**Researcher:** Yaa Nuamah Kusi-Fordjour
+
+The proposed content is a progressive, hands-on AI agent security experience in which participants build or inspect a small cybersecurity agent, observe how untrusted content can manipulate it, apply defensive controls, and retest the protected workflow. The shared scenario uses a synthetic suspicious-IP alert. The agent extracts the indicator, queries mock evidence, produces a structured recommendation, passes the proposed response through deterministic policy and human approval, invokes only a simulated allowlisted tool, and records an audit trail.
+
+The content belongs in the Agent Lab because participants directly examine the components that give an AI system agency: model, instructions, data, tools, identity, permissions, policy, approval, and logging. It combines construction with adversarial testing and defensive engineering. This reflects established AI security event formats while addressing risks identified by OWASP, MITRE ATLAS, and NIST, including prompt injection, tool misuse, excessive agency, privilege abuse, data exposure, and inadequate oversight.
+
+The recommended participant journey has four layers: a 5–10 minute prompt-injection first win; a 25–35 minute guided suspicious-IP triage bot lab; a 20–30 minute Agent Under Attack clinic; and an optional 30–45 minute defense challenge. All activities reuse the same scenario and isolated environment, enabling beginner entry and advanced progression without maintaining unrelated platforms.
+
+The recommended pilot requires two participant laptops, one facilitator laptop, a display, an isolated managed network, venue-approved power, optional local service hardware, synthetic data, containerized sessions, mock threat-intelligence and firewall services, structured logging, and an offline fallback. A two-station pilot should use three operating staff, with a fourth technical-support person preferred during busy periods. The preliminary cost rating is **medium**, but a cash estimate requires dated Ghanaian supplier and venue quotations. Borrowed or sponsored equipment is the main opportunity to reduce cost.
+
+The preliminary feasibility score is **3.6 out of 5**. Technical, safety, accessibility, and engagement feasibility are promising, but staffing, reset time, offline behavior, equipment availability, compliance, throughput, and final cost remain untested. The platform must use only event-owned systems, synthetic data, least-privilege identities, deterministic authorization, explicit approval, simulation-only actions, and disposable sessions. NESTCON should complete relevant Ghanaian legal, privacy, licensing, venue, and accessibility reviews before deployment.
+
+**Recommendation:** Pilot Before NESTCON. Run a controlled Road to NESTCON pilot with two stations and 8–12 mixed-experience participants. Proceed to the full hybrid zone only if the pilot verifies isolation, zero successful unauthorized action, audit completeness, reset reliability, learning outcomes, offline operation, staffing capacity, approved costs, and required reviews. If safety or isolation fails, do not deploy the interactive environment; if only capacity or timing fails, deliver the content as a scheduled clinic while the hands-on design is improved.
 
 ## Appendices
 
