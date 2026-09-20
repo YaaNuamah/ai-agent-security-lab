@@ -511,22 +511,190 @@ The activity must not open to participants until the lead confirms:
 
 ## 10. Participant Experience and Learning Outcomes
 
-- Target participant levels
-- Measurable learning outcomes
-- Participant takeaway beginning with “After completing this activity, I can…”
+### 10.1 Target Participants
+
+The zone is designed for a mixed audience while preserving a clear progression:
+
+| Participant | Suitable entry point | Prior knowledge |
+| --- | --- | --- |
+| Beginner or curious visitor | First-win activity and clinic | None required |
+| Student or early-career technologist | First win and guided lab | Basic understanding of cybersecurity concepts is helpful |
+| Developer, analyst, or defender | Guided lab and clinic | Familiarity with APIs, alerts, or application workflows |
+| Experienced security or AI practitioner | Advanced challenge | Threat modeling, application security, scripting, or agent experience |
+
+The facilitator should route participants by interest and comfort rather than academic qualification or job title. Pairing is encouraged where one participant understands security and the other understands software or AI.
+
+### 10.2 Learning Outcomes
+
+At the end of the appropriate activity, a participant should be able to:
+
+1. Identify the main components of an AI agent: instructions, model, data, tools, identity, permissions, policy, and logs.
+2. Distinguish trusted policy, an authorized request, and untrusted content.
+3. Explain how indirect prompt injection can enter through an alert, email, log, webpage, or tool response.
+4. Explain why model output is a recommendation rather than authorization.
+5. Select controls for least privilege, allowlisted tools, parameter validation, human approval, and auditability.
+6. Test both legitimate and adversarial inputs to confirm that security controls preserve useful behavior.
+7. Recognize when a system should fail safely instead of attempting an uncertain action.
+
+### 10.3 Assessment Measures
+
+| Measure | Collection method | Pilot target |
+| --- | --- | ---: |
+| Trust-boundary recognition | First-win scenario score | At least 80% identify the malicious instruction and correct trust category |
+| Core concept improvement | Three-question pre/post check | Median improvement of at least one correct answer |
+| Safe workflow completion | Guided-lab control checklist | At least 75% complete with policy/approval control present |
+| Attack containment | Automated challenge tests | No successful unauthorized simulated action in a passing submission |
+| Explanation quality | One-minute participant debrief | At least 75% can explain why the model cannot authorize itself |
+| Operational usability | Completion and assistance logs | At least 70% finish within the target duration with no more than two hints |
+| Participant value | One-question exit rating | At least 80% rate the activity useful or very useful |
+
+These are pilot targets, not established results. They should be reviewed after the first test group to ensure that the questions, scoring, and time limits are fair and understandable.
+
+### 10.4 Participant Takeaways
+
+**Beginner:** “After completing this activity, I can recognize when an AI agent is treating untrusted data as an instruction.”
+
+**Guided lab:** “After completing this activity, I can explain and configure the controls that separate an AI recommendation from an authorized action.”
+
+**Advanced:** “After completing this activity, I can test an agent for prompt injection, tool misuse, privilege, approval, data-protection, and safe-failure weaknesses, then verify the defensive changes.”
+
+Each participant should receive a short digital reference containing the workflow diagram, key control checklist, approved learning resources, and a reminder to test only authorized systems.
 
 ## 11. Cost and Resource Assessment
 
-List hardware, software, infrastructure, consumables, specialist equipment, quantities, purpose, availability, and dated cost assumptions. Give an overall low, medium, or high cost rating.
+### 11.1 Costing Method
+
+The cost assessment separates reusable equipment from event-specific operating costs. It does not present unverified online prices as Ghana supplier quotations. Before approval, the organizers should obtain at least two dated local quotations for material purchases and confirm taxes, delivery, warranty, power compatibility, and support.
+
+Use this calculation for each item:
+
+```text
+Implementation cost = quantity × unit price + delivery + tax + contingency
+```
+
+Record all amounts in Ghana cedis, include the date checked, and state whether the item will be bought, borrowed, sponsored, or already owned. If a foreign-currency service is used, record the exchange rate source and date rather than assuming a fixed conversion.
+
+### 11.2 Resource Estimate
+
+| Area | Requirement | Quantity | Cost treatment | Availability strategy |
+| --- | --- | ---: | --- | --- |
+| Participant hardware | Laptop meeting the Section 7 baseline | 2 plus 1 spare preferred | Local quotation only if not already owned | Borrow from organizers, university, sponsor, or purchase |
+| Facilitator hardware | Laptop with 16 GB RAM preferred | 1 | Local quotation only if not already owned | Organizer or facilitator asset |
+| Local server | 8-core CPU, 32 GB RAM, SSD, if centralized/local inference is selected | 1 optional | Quote separately; likely largest equipment cost | Borrow/sponsor first; remove for station-local design |
+| Display | 40-inch or larger display/projector | 1 | Venue or AV quotation | Use venue equipment where possible |
+| Network | Managed switch/router and Ethernet cables | 1 set | Local quotation | Borrow from event network team or sponsor |
+| Power | Venue-approved distribution, cable covers, optional UPS | 1 set | Venue/electrical quotation | Reuse approved event equipment |
+| Software | Lab application, containers, mock services, policy and scoring | 1 deployment | Open-source license review plus development effort | Prefer open-source components with recorded licenses |
+| Model inference | Local model, approved cloud API, or prepared fallback | Usage-based | Cap and monitor any API spend | Offline-first; prepaid or hard-limited account if online |
+| Connectivity | Dedicated controlled connection if online mode is used | 1 | Venue/provider quotation | Primary lab must not depend on it |
+| Printing/signage | Rules, quick start, station labels, facilitator checklist | 1 set | Local print quotation | Print only final tested materials |
+| Staffing | Lead, two facilitators, technical support | 3–4 people | Organizer decision on volunteer, stipend, or paid time | Schedule shifts and breaks explicitly |
+| Contingency | Replacement adapters, storage media, unexpected operational costs | 10–15% of cash expenditure | Calculated after quotations | Held by activity lead |
+
+### 11.3 Implementation Options
+
+**Option A Minimal pilot.** Two borrowed laptops, facilitator laptop, station-local containers, precomputed or approved remote model responses, existing display, and printed materials. This is the lowest cash-cost option and is appropriate for validating learning and operations with a small group. Its main limitations are reduced concurrency and dependence on borrowed equipment.
+
+**Option B Recommended event setup.** Two participant stations plus spare, facilitator station, isolated managed network, reusable local service host, display, protected power, offline/degraded mode, monitoring, and staffed reset support. This offers the best balance of reliability, learning quality, and controlled cost.
+
+**Option C Enhanced setup.** Additional stations, dedicated local-inference hardware, redundant network/power, automated provisioning, and expanded challenge infrastructure. This should be considered only after a successful pilot produces reliable demand, throughput, and staffing evidence.
+
+### 11.4 Overall Cost Rating
+
+**Preliminary rating: Medium for the recommended event setup.**
+
+The software can be built largely with open-source components, but reliable participant devices, isolation equipment, power, display, staffing, spares, and testing create meaningful operational cost. The rating may fall to low if equipment and venue infrastructure are borrowed or sponsored, or rise to high if NESTCON must purchase all hardware or provide dedicated local AI inference. A cash amount must not be approved until quotations and the final architecture are recorded.
 
 ## 12. Feasibility Assessment
 
-- Score technical, cost, staffing, safety, beginner accessibility, engagement, setup complexity, and scalability from 1 to 5.
-- Identify implementation challenges and proposed solutions.
+### 12.1 Preliminary Ratings
+
+Scale: 1 means poor or difficult feasibility; 5 means strong or easy feasibility. Setup complexity is scored inversely, so 5 means simple to set up. Scores are design estimates pending a pilot.
+
+| Area | Rating | Rationale |
+| --- | ---: | --- |
+| Technical feasibility | 4/5 | The core workflow can use ordinary web services, containers, mock APIs, and synthetic data without enterprise integrations. |
+| Cost feasibility | 3/5 | Open-source software reduces licensing cost, but equipment, staffing, power, networking, and spares remain material. |
+| Staffing feasibility | 3/5 | A two-station pilot is manageable with three to four prepared staff; scaling creates a facilitator bottleneck. |
+| Safety feasibility | 4/5 | Synthetic data, mock tools, isolation, simulation-only actions, and disposable sessions substantially reduce risk. |
+| Beginner accessibility | 4/5 | The first-win activity has no technical prerequisite; the guided lab needs plain-language instructions and a tested hint path. |
+| Participant engagement | 5/5 | The visible build, attack, defend, and retest progression supports active decision-making and immediate feedback. |
+| Setup simplicity | 3/5 | Containers and automated resets help, but networking, model fallback, testing, and station recovery require preparation. |
+| Scalability | 3/5 | Station images can be replicated, but hardware, facilitators, model capacity, queues, and reset time constrain throughput. |
+
+**Preliminary feasibility average: 3.6/5.** The average is a communication aid rather than a validated quantitative result; no weighted decision model has yet been approved.
+
+### 12.2 Key Challenges and Proposed Solutions
+
+| Challenge | Effect | Proposed solution | Validation evidence needed |
+| --- | --- | --- | --- |
+| Unreliable internet or API access | Model calls fail and sessions stall | Offline-first services, local or prepared-response fallback, strict timeouts | Full lab test with internet disconnected |
+| Limited participant hardware | Reduced capacity and long queues | Borrow/sponsor devices, pair participants, scheduled lab slots, first-win overflow activity | Confirmed equipment inventory |
+| Mixed experience levels | Beginners become lost or advanced users disengage | Progressive entry points, role-based pairing, hint ladder, optional challenge | Pilot observation by experience level |
+| Facilitator load | Slow support and incomplete resets | One facilitator per active station in pilot, scripted briefing, automated health checks | Timed staffing and reset study |
+| Model variability | Inconsistent outputs and scoring | Structured schema, bounded task, fixed test cases, deterministic policy, prepared fallback | Repeated regression results |
+| Unsafe or out-of-scope testing | Legal, privacy, or operational harm | Event-owned targets, rules of engagement, isolated network, monitoring, stop procedure | Documented authorization and isolation test |
+| Data or credential leakage | Privacy or account compromise | Synthetic data, temporary identities, secret scanning, redaction, session destruction | Pre-opening inspection and leakage tests |
+| Power interruption | Lost sessions or corrupted state | Station-local recovery, read-only baseline, protected power/UPS where available | Power-loss recovery exercise |
+| High reset time | Reduced capacity | Disposable instances, automated reset and smoke tests, spare station | Median and maximum pilot reset time |
+| Compliance uncertainty | Delayed approval or unsuitable delivery model | Early organizer, venue, privacy, legal, and CSA-related review | Recorded review outcomes |
+
+### 12.3 Feasibility Conditions
+
+The activity is feasible if NESTCON can provide or approve:
+
+- A written authorized scope and event-owned environment.
+- At least two suitable participant devices and one facilitator device.
+- An isolated network and venue-approved power arrangement.
+- Three trained staff for a two-station pilot, with technical escalation available.
+- A tested offline or degraded mode.
+- Time for a Road to NESTCON pilot and one revision cycle.
+- Organizer review of privacy, legal, licensing, accessibility, and safeguarding requirements.
+
+If these conditions cannot be met, the zone should use the first-win activity and scheduled demonstration rather than operate the full guided lab or advanced challenge.
 
 ## 13. Final Recommendation
 
-Choose and justify one outcome: recommended, recommended with modifications, pilot first, clinic or demonstration only, flex-table activity, or not recommended. Describe the recommended NESTCON implementation concisely.
+### 13.1 Recommendation
+
+**Pilot Before NESTCON, with a path to Recommended with Modifications.**
+
+The content is strongly aligned with the Agent Lab zone and can provide an engaging progression from beginner awareness to advanced adversarial testing. The technical design is achievable without production integrations or expensive enterprise security platforms. However, participant duration, model behavior, reset reliability, facilitator load, offline operation, hardware availability, compliance requirements, and actual cost have not yet been validated. These uncertainties affect both safety and event throughput, so the full activity should not move directly from document design to the festival floor.
+
+### 13.2 Recommended Pilot
+
+Run one controlled Road to NESTCON pilot with:
+
+- Two participant stations.
+- Eight to twelve participants across different experience levels.
+- One first-win activity, one guided lab, a shortened demonstration, and at least two advanced-challenge attempts.
+- Three operating staff: lead/technical operator and two facilitators.
+- Synthetic data, mock services, simulation-only actions, isolated networking, and no production credentials.
+- Both normal operation and an intentional internet/model outage test.
+- Timed setup, briefing, completion, assistance, reset, and recovery measurements.
+- Pre/post learning checks and a short participant feedback form.
+- A documented safety review and post-pilot go/no-go meeting.
+
+### 13.3 Go No Go Criteria
+
+Proceed to the full NESTCON implementation only if the pilot demonstrates:
+
+1. No path from the agent or participant environment to real systems or production credentials.
+2. No successful unauthorized simulated action in the release test suite.
+3. A complete audit trail for every simulated action.
+4. Median reset time at or below five minutes and no unexplained cross-session state.
+5. At least 75% guided-lab completion within the final session limit.
+6. At least 75% of participants can explain why AI recommendation and action authorization must remain separate.
+7. The lab completes successfully in degraded or offline mode.
+8. Staffing and queue observations support the planned capacity.
+9. Final equipment, venue, staffing, and service costs are approved.
+10. Organizer, venue, privacy, legal, accessibility, and any applicable regulatory reviews are complete.
+
+If safety or isolation criteria fail, do not deploy the interactive environment. If only capacity, timing, or staffing criteria fail, reduce the number of activities or deliver the content as a scheduled clinic/demonstration while the hands-on design is improved.
+
+### 13.4 Recommended NESTCON Implementation
+
+Subject to a successful pilot, implement the zone as a hybrid experience centered on one isolated suspicious-IP triage scenario. Offer a walk-up prompt-injection first win, scheduled guided Build-a-Bot sessions, an Agent Under Attack demonstration, and an optional scored defense challenge. Operate only on event-owned equipment with synthetic data, mock services, deterministic authorization, explicit approval, simulation-only tools, structured logs, and automated resets. Keep a tested offline fallback and scale stations only when facilitator and recovery capacity increase with them.
 
 ## 14. Future Development
 
