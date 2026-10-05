@@ -1,0 +1,6 @@
+{
+  "event_id": "lab-alert-001",
+  "source": "synthetic_siem",
+  "indicator": "203.0.113.10",
+  "description": "Fictional repeated failed sign-ins from the indicated address."
+}

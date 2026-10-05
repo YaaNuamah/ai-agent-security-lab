@@ -2,7 +2,7 @@
 
 An implementation-focused research project for designing a safe, practical cyber AI agent village. The project combines **Build-a-Bot** activities with **Agent Under Attack** exercises so participants can learn how agents are built, how they fail, and how to secure them.
 
-> Status: Research and design in progress  
+> Status: Research, design, and simulation-only prototype in progress
 > Assignment: Z2 — Agent Lab  
 > Focus: AI agent development and security
 
@@ -52,7 +52,12 @@ See [Source Context and Project Interpretation](docs/source-context.md) for the 
 ```text
 ai-agent-security-lab/
 ├── README.md
+├── cyber_agent/                # Offline deterministic baseline
+├── fixtures/                   # Synthetic documentation-only data
+├── tests/                      # Standard-library unit tests
 ├── docs/
+│   ├── build-architecture.md
+│   ├── learning-backlog.md
 │   ├── implementation-report.md
 │   ├── project-scope.md
 │   ├── research-log.md
@@ -64,6 +69,20 @@ ai-agent-security-lab/
 └── evidence/
     └── README.md
 ```
+
+## Run the first prototype
+
+The first milestone is a deterministic suspicious-IP triage agent. It has no LLM, network calls, credentials, or state-changing tools. Its input is a structured synthetic alert; the free-text description is untrusted context and cannot authorize an action.
+
+From this repository directory, run:
+
+```bash
+python3 -m cyber_agent fixtures/alert-suspicious.json
+python3 -m cyber_agent fixtures/alert-injection.json
+python3 -m unittest discover -s tests -v
+```
+
+The suspicious and injection cases should both produce `approval_required` and `action_executed: false`. This is an approval *classification*, not an implemented approval workflow or a firewall action. The prototype currently records an in-memory development audit trace; it is not a production audit system. See [the build architecture](docs/build-architecture.md) and [learning backlog](docs/learning-backlog.md) for boundaries and next steps.
 
 ## Research Method
 
@@ -98,7 +117,8 @@ ai-agent-security-lab/
 - [x] Draft learning outcomes, assessment measures, cost model, feasibility scoring, and recommendation.
 - [x] Complete future-development roadmap, consolidated references, and executive summary.
 - [ ] Validate the design with venue, budget, legal, and organizer inputs.
-- [ ] Build and test a minimal prototype.
+- [x] Build and test the deterministic synthetic-alert baseline.
+- [ ] Add simulation-only tool gateway, exact-action approval, and participant interface.
 - [ ] Finalize the implementation report and executive recommendations.
 
 ## Publication Note

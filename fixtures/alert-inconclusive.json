@@ -1,0 +1,6 @@
+{
+  "event_id": "lab-alert-003",
+  "source": "synthetic_siem",
+  "indicator": "198.51.100.20",
+  "description": "Fictional isolated sign-in failure for investigation."
+}

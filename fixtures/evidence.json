@@ -1,0 +1,26 @@
+[
+  {
+    "evidence_id": "ev-siem-001",
+    "indicator": "203.0.113.10",
+    "source": "synthetic_siem",
+    "observed_at": "2026-01-01T10:00:00Z",
+    "label": "malicious",
+    "summary": "Fictional repeated failed sign-ins in the lab dataset."
+  },
+  {
+    "evidence_id": "ev-intel-001",
+    "indicator": "203.0.113.10",
+    "source": "synthetic_intel",
+    "observed_at": "2026-01-01T10:05:00Z",
+    "label": "malicious",
+    "summary": "Fictional reputation entry for the lab scenario."
+  },
+  {
+    "evidence_id": "ev-siem-002",
+    "indicator": "198.51.100.20",
+    "source": "synthetic_siem",
+    "observed_at": "2026-01-01T11:00:00Z",
+    "label": "inconclusive",
+    "summary": "Fictional isolated sign-in failure without corroboration."
+  }
+]
