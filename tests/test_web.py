@@ -1,6 +1,7 @@
 import threading
+import socket
 import unittest
-from http.server import HTTPServer
+from http.server import ThreadingHTTPServer
 from urllib.error import HTTPError
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
@@ -11,7 +12,7 @@ from cyber_agent.web import LabSession, make_handler, render_page
 class WebTests(unittest.TestCase):
     def setUp(self):
         self.session = LabSession()
-        self.server = HTTPServer(("127.0.0.1", 0), make_handler(self.session, 0))
+        self.server = ThreadingHTTPServer(("127.0.0.1", 0), make_handler(self.session, 0))
         self.port = self.server.server_address[1]
         self.server.RequestHandlerClass = make_handler(self.session, self.port)
         self.thread = threading.Thread(target=self.server.serve_forever, daemon=True)
@@ -34,6 +35,12 @@ class WebTests(unittest.TestCase):
 
     def post(self, path, **fields):
         return self.request(path, {"csrf": self.session.csrf, **fields})
+
+    def test_idle_connection_does_not_block_page(self):
+        with socket.create_connection(("127.0.0.1", self.port), timeout=2):
+            status, page = self.request()
+            self.assertEqual(status, 200)
+            self.assertIn("Cyber Agent Lab", page)
 
     def test_full_participant_flow(self):
         status, page = self.request()

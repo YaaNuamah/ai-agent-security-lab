@@ -5,7 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 from html import escape
-from http.server import BaseHTTPRequestHandler, HTTPServer
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from secrets import token_urlsafe
 from urllib.parse import parse_qs
@@ -275,7 +275,7 @@ def main():
     if not 1024 <= args.port <= 65535:
         parser.error("port must be between 1024 and 65535")
     session = LabSession()
-    with HTTPServer(("127.0.0.1", args.port), make_handler(session, args.port)) as server:
+    with ThreadingHTTPServer(("127.0.0.1", args.port), make_handler(session, args.port)) as server:
         print(f"Open http://127.0.0.1:{args.port} in your browser. Press Ctrl+C to stop.", flush=True)
         try:
             server.serve_forever()
