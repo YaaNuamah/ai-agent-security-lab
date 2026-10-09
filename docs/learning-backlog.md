@@ -30,11 +30,11 @@ This backlog is ordered to produce a working, testable agent increment before ad
 
 **B11 Build the participant interface — local walkthrough implemented.** Show alert, evidence, recommendation, policy decision, and audit timeline. Learn usable security explanations. The current interface is localhost-only and single-user; pilot validation with beginners remains to be done.
 
-**B12 Add attack-and-defend replay — deterministic checks implemented.** Test injected instructions, malformed indicators, duplicate events, missing evidence, and tool misuse. Learn threat modelling and regression tests. The five protected-workflow checks pass; participant comprehension and any future LLM behavior remain untested.
+**B12 Add attack-and-defend replay — deterministic checks implemented.** Test injected instructions, malformed indicators, duplicate events, missing evidence, and tool misuse. Learn threat modelling and regression tests. The six protected-workflow checks pass; participant comprehension and any future live LLM behavior remain untested.
 
 ## Milestone 4 Optional AI layer and pilot
 
-**B13 Add a replaceable model adapter.** Limit the model to structured assessment and summary; keep policy and tools independent. Learn LLM integration and structured output validation. Done when malformed, timed-out, or unavailable model responses fail safely and offline replay remains usable.
+**B13 Add a replaceable model adapter — offline boundary implemented.** A protocol and recorded-response adapter supply structured assessments; schema checks reject malformed references or mismatched indicators, and failures do not alter policy. Learn LLM integration and structured output validation. A live model, provider choice, data-processing decision, and model-specific evaluations are still outstanding.
 
 **B14 Run a small pilot.** Measure completion, understanding, reset time, and facilitator load. Learn evaluation and operations. Done when observed results are recorded separately from design assumptions and reviewed before scaling.
 

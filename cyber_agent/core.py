@@ -8,6 +8,8 @@ from copy import deepcopy
 from ipaddress import ip_address, ip_network
 from typing import Any, Mapping
 
+from .assessment import ModelAdapter, validate_assessment
+
 
 class ValidationError(ValueError):
     """An alert or evidence fixture does not meet the lab contract."""
@@ -90,7 +92,8 @@ class Evidence:
 class Agent:
     """A one-process lab agent; repeated event IDs return the first result."""
 
-    def __init__(self, evidence_rows: list[Mapping[str, Any]]):
+    def __init__(self, evidence_rows: list[Mapping[str, Any]],
+                 model_adapter: ModelAdapter | None = None):
         evidence = [Evidence.parse(row) for row in evidence_rows]
         ids = [row.evidence_id for row in evidence]
         if len(ids) != len(set(ids)):
@@ -104,6 +107,7 @@ class Agent:
         self._results: dict[str, dict[str, Any]] = {}
         self._fingerprints: dict[str, tuple[str, str, str]] = {}
         self._audit: list[dict[str, Any]] = []
+        self._model_adapter = model_adapter
 
     @property
     def audit(self) -> tuple[dict[str, Any], ...]:
@@ -134,6 +138,31 @@ class Agent:
             recommendation, policy = "investigate", "recommend_only"
             reason = "Evidence does not meet the lab threshold for containment review."
 
+        model_status = "not_configured"
+        model_assessment = None
+        if self._model_adapter is not None:
+            try:
+                raw_assessment = self._model_adapter.assess(
+                    event_id=alert.event_id,
+                    indicator=alert.indicator,
+                    description=alert.description,
+                    evidence=[{
+                        "evidence_id": row.evidence_id,
+                        "source": row.source,
+                        "observed_at": row.observed_at,
+                        "label": row.label,
+                        "summary": row.summary,
+                    } for row in evidence],
+                )
+                model_assessment = validate_assessment(
+                    raw_assessment, indicator=alert.indicator,
+                    available_evidence_ids={row.evidence_id for row in evidence},
+                ).as_dict()
+                model_status = "validated_assessment"
+            except Exception:
+                # Optional provider failure cannot change or authorize the policy decision.
+                model_status = "unavailable_or_invalid"
+
         result = {
             "event_id": alert.event_id,
             "indicator": alert.indicator,
@@ -141,6 +170,8 @@ class Agent:
             "recommendation": recommendation,
             "policy_decision": policy,
             "reason": reason,
+            "model_status": model_status,
+            "model_assessment": model_assessment,
             "action_executed": False,
         }
         self._results[alert.event_id] = result
@@ -152,6 +183,7 @@ class Agent:
             "evidence_ids": result["evidence_ids"].copy(),
             "recommendation": recommendation,
             "policy_decision": policy,
+            "model_status": model_status,
             "action_executed": False,
         })
         return deepcopy(result)

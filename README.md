@@ -52,7 +52,7 @@ See [Source Context and Project Interpretation](docs/source-context.md) for the 
 ```text
 ai-agent-security-lab/
 ├── README.md
-├── cyber_agent/                # Offline triage and simulation gateway
+├── cyber_agent/                # Offline triage, assessment boundary, and simulation gateway
 ├── fixtures/                   # Synthetic documentation-only data
 ├── tests/                      # Standard-library unit tests
 ├── docs/
@@ -74,7 +74,7 @@ ai-agent-security-lab/
 
 ## Run the first prototype
 
-The prototype contains deterministic suspicious-IP triage and a simulation-only approval gateway. It has no LLM, network calls, credentials, or real state-changing tools. Its input is a structured synthetic alert; the free-text description is untrusted context and cannot authorize an action.
+The prototype contains deterministic suspicious-IP triage, a recorded model-style assessment boundary, and a simulation-only approval gateway. It has no live LLM, network calls, credentials, or real state-changing tools. Its input is a structured synthetic alert; the free-text description is untrusted context and cannot authorize an action.
 
 From this repository directory, run:
 
@@ -86,7 +86,7 @@ python3 -m cyber_agent.web
 python3 -m unittest discover -s tests -v
 ```
 
-The web interface opens at `http://127.0.0.1:8765` while the server is running; press `Ctrl+C` to stop it. The suspicious and injection cases both produce `approval_required` and `action_executed: false`. The walkthrough shows a local approval and a **simulated** outcome, never a firewall action. **Run safety replay** exercises five fictional failure cases against the protected workflow. The approver label is not authenticated, and the audit trace is in memory; neither is a production security control. See the [run and test guide](docs/run-and-test.md), [attack replay guide](docs/attack-replay-guide.md), [build architecture](docs/build-architecture.md), and [learning backlog](docs/learning-backlog.md).
+The web interface opens at `http://127.0.0.1:8765` while the server is running; press `Ctrl+C` to stop it. The suspicious and injection cases both produce `approval_required` and `action_executed: false`. A saved assessment is displayed as advisory text. In the inconclusive case it intentionally suggests a block review, but the independent policy remains `recommend_only`. The walkthrough shows a local approval and a **simulated** outcome, never a firewall action. **Run safety replay** exercises six fictional failure cases against the protected workflow. The approver label is not authenticated, and the audit trace is in memory; neither is a production security control. See the [run and test guide](docs/run-and-test.md), [attack replay guide](docs/attack-replay-guide.md), [build architecture](docs/build-architecture.md), and [learning backlog](docs/learning-backlog.md).
 
 ## Research Method
 
@@ -125,6 +125,8 @@ The web interface opens at `http://127.0.0.1:8765` while the server is running; 
 - [x] Add a simulation-only tool gateway and exact-action approval demonstration.
 - [x] Add a localhost participant walkthrough and in-memory reset.
 - [x] Add deterministic attack-and-defend replay checks.
+- [x] Add a recorded-response model adapter and validate its output separately from policy.
+- [ ] Choose and evaluate a real model provider only after data-processing and cost decisions.
 - [ ] Add authenticated participants and persistent audit only if pilot requirements justify them.
 - [ ] Finalize the implementation report and executive recommendations.
 

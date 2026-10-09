@@ -11,6 +11,7 @@ from secrets import token_urlsafe
 from urllib.parse import parse_qs
 
 from .core import Agent, ValidationError
+from .assessment import RecordedAdapter
 from .replay import run_replay
 from .simulation import AuthorizationError, ProposedAction, SimulationGateway
 
@@ -51,7 +52,7 @@ class LabSession:
         self.reset()
         self.case_name = case_name
         self.alert = _load(case_name)
-        self.agent = Agent(_load("evidence.json"))
+        self.agent = Agent(_load("evidence.json"), RecordedAdapter(_load("recorded-assessments.json")))
         self.result = self.agent.process(self.alert)
         self.gateway = SimulationGateway(self.agent)
 
@@ -126,6 +127,19 @@ def render_page(session: LabSession, notice: str = "", error: bool = False) -> s
             f'<p>{escape(result["reason"])}</p>'
             '<p class="safe">Real action executed: No</p></section>'
         )
+        assessment = result["model_assessment"]
+        if assessment is not None:
+            content += (
+                '<section><h2>Recorded model-style assessment</h2>'
+                '<p class="muted">This is a saved example response, not a live AI model. It may be wrong and cannot authorize an action.</p>'
+                f'<p><strong>Classification:</strong> {escape(assessment["classification"])}</p>'
+                f'<p><strong>Summary:</strong> {escape(assessment["summary"])}</p>'
+                f'<p><strong>Suggested action:</strong> {escape(assessment["suggested_action"])}</p>'
+                f'<p><strong>Cited evidence:</strong> {escape(", ".join(assessment["evidence_ids"]))}</p>'
+                '</section>'
+            )
+        elif result["model_status"] != "not_configured":
+            content += '<section><h2>Recorded model-style assessment</h2><p>Response unavailable or invalid. The independent policy still applies.</p></section>'
         if result["policy_decision"] == "approval_required":
             if session.proposal is None:
                 content += '<section><h2>4. Propose mock action</h2><p>A 60-minute IP block is proposed in simulation only.</p>'
@@ -153,7 +167,7 @@ def render_page(session: LabSession, notice: str = "", error: bool = False) -> s
         )
         content += f'<section><h2>Audit timeline</h2><ol>{trail_html}</ol></section>'
         content += '<section><h2>Attack and defend replay</h2>'
-        content += '<p>Run five fictional checks against the protected workflow. The risk statements are counterfactual teaching examples, not observed compromises.</p>'
+        content += '<p>Run six fictional checks against the protected workflow. The risk statements are counterfactual teaching examples, not observed compromises.</p>'
         content += _form("/replay", "Run safety replay", session.csrf)
         if session.replay_results is not None:
             replay_html = "".join(

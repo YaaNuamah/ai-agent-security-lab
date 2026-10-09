@@ -46,7 +46,7 @@ An audit event in this milestone is a development trace, **not** tamper-resistan
 2. Evidence fixtures are test data. Provenance is displayed so a participant can see why a recommendation was made.
 3. The triage engine makes a recommendation only. It has no access to a state-changing tool.
 4. The policy gate is code outside the triage engine. Unknown or insufficient evidence cannot produce a containment recommendation.
-5. If an LLM is added later, its output must be schema-validated and sent through this independent policy gate. A model confidence score must not authorize an action.
+5. The optional model-style assessment is schema-validated and displayed separately. It cannot change the independent policy gate. A model confidence score must not authorize an action.
 
 ## Rules for the baseline
 
@@ -66,7 +66,11 @@ The demo approver is a text label, **not** an authenticated person. Tokens and a
 
 ## Next boundary before an LLM
 
-A single-user localhost participant interface now shows alert, evidence, decision, local approval, simulated result, and audit timeline. It can reset its in-memory session. Five deterministic attack-and-defend replay checks cover injected alert text, malformed IPs, missing evidence, unknown tools, and duplicate events. This is a teaching interface, not authenticated multi-user software or an LLM prompt-injection evaluation. Next assess participant comprehension, reset timing, and whether the pilot needs persistent audit storage. A later model adapter should remain replaceable with recorded responses for offline use. No live security integration is part of the event prototype.
+A single-user localhost participant interface now shows alert, evidence, decision, local approval, simulated result, and audit timeline. It can reset its in-memory session. Six replay checks cover injected alert text, malformed IPs, missing evidence, unknown tools, duplicate events, and a recorded model-style suggestion that overstates the evidence. This is a teaching interface, not authenticated multi-user software or an LLM prompt-injection evaluation.
+
+The `ModelAdapter` protocol now defines the assessment input and response boundary. A `RecordedAdapter` supplies saved examples offline. The response validator checks exact fields, allowed labels, indicator matching, length, and whether cited evidence IDs were supplied. It does **not** establish that a summary is factually correct. The deterministic policy is calculated independently and cannot be overwritten by an assessment. Missing, malformed, or timed-out adapter output is marked unavailable; the policy remains in force. No live model/provider, API key, or external request is configured.
+
+Next assess participant comprehension, reset timing, and whether the pilot needs persistent audit storage. Before adding a real provider, decide where data may be processed, what may be sent, cost and timeout limits, and how offline fallback will work. No live security integration is part of the event prototype.
 
 ## Definition of done for this milestone
 
