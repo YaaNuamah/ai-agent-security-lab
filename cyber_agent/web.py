@@ -11,6 +11,7 @@ from secrets import token_urlsafe
 from urllib.parse import parse_qs
 
 from .core import Agent, ValidationError
+from .replay import run_replay
 from .simulation import AuthorizationError, ProposedAction, SimulationGateway
 
 
@@ -42,6 +43,7 @@ class LabSession:
         self.proposal: ProposedAction | None = None
         self.approval_token: str | None = None
         self.outcome: dict | None = None
+        self.replay_results: list[dict] | None = None
 
     def start(self, case_name: str):
         if case_name not in CASES:
@@ -79,6 +81,11 @@ class LabSession:
             indicator=self.proposal.indicator,
             duration_minutes=self.proposal.duration_minutes,
         )
+
+    def replay(self):
+        if self.result is None:
+            raise AuthorizationError("start a case first")
+        self.replay_results = run_replay()
 
 
 def _form(action: str, label: str, csrf: str, extra: str = "") -> str:
@@ -145,6 +152,20 @@ def render_page(session: LabSession, notice: str = "", error: bool = False) -> s
             for entry in trail
         )
         content += f'<section><h2>Audit timeline</h2><ol>{trail_html}</ol></section>'
+        content += '<section><h2>Attack and defend replay</h2>'
+        content += '<p>Run five fictional checks against the protected workflow. The risk statements are counterfactual teaching examples, not observed compromises.</p>'
+        content += _form("/replay", "Run safety replay", session.csrf)
+        if session.replay_results is not None:
+            replay_html = "".join(
+                f'<li><strong>{escape(str(row["case"]))}: '
+                f'{"PASS" if row["passed"] else "FAIL"}</strong><br>'
+                f'Risk: {escape(str(row["risk"]))}<br>'
+                f'Observed: {escape(str(row["observed"]))}<br>'
+                f'Control: {escape(str(row["control"]))}</li>'
+                for row in session.replay_results
+            )
+            content += f'<ol>{replay_html}</ol>'
+        content += '</section>'
         content += _form("/reset", "Reset lab", session.csrf)
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -191,7 +212,7 @@ def make_handler(session: LabSession, port: int):
             self._send(render_page(session))
 
         def do_POST(self):
-            if not self._allowed_host() or self.path not in {"/start", "/propose", "/approve", "/execute", "/reset"}:
+            if not self._allowed_host() or self.path not in {"/start", "/propose", "/approve", "/execute", "/replay", "/reset"}:
                 self._send("<!doctype html><title>Not found</title><p>Request not allowed.</p>", 404)
                 return
             origin = self.headers.get("Origin")
@@ -220,6 +241,9 @@ def make_handler(session: LabSession, port: int):
                 elif self.path == "/execute":
                     session.execute()
                     notice = "Simulation complete. No real action occurred."
+                elif self.path == "/replay":
+                    session.replay()
+                    notice = "Safety replay complete. Review each observed control."
                 else:
                     session.reset()
                     notice = "Lab reset."

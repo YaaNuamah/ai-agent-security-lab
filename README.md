@@ -57,6 +57,7 @@ ai-agent-security-lab/
 ├── tests/                      # Standard-library unit tests
 ├── docs/
 │   ├── build-architecture.md
+│   ├── attack-replay-guide.md
 │   ├── learning-backlog.md
 │   ├── run-and-test.md
 │   ├── implementation-report.md
@@ -85,7 +86,7 @@ python3 -m cyber_agent.web
 python3 -m unittest discover -s tests -v
 ```
 
-The web interface opens at `http://127.0.0.1:8765` while the server is running; press `Ctrl+C` to stop it. The suspicious and injection cases both produce `approval_required` and `action_executed: false`. The walkthrough shows a local approval and a **simulated** outcome, never a firewall action. The approver label is not authenticated, and the audit trace is in memory; neither is a production security control. See the [run and test guide](docs/run-and-test.md), [build architecture](docs/build-architecture.md), and [learning backlog](docs/learning-backlog.md).
+The web interface opens at `http://127.0.0.1:8765` while the server is running; press `Ctrl+C` to stop it. The suspicious and injection cases both produce `approval_required` and `action_executed: false`. The walkthrough shows a local approval and a **simulated** outcome, never a firewall action. **Run safety replay** exercises five fictional failure cases against the protected workflow. The approver label is not authenticated, and the audit trace is in memory; neither is a production security control. See the [run and test guide](docs/run-and-test.md), [attack replay guide](docs/attack-replay-guide.md), [build architecture](docs/build-architecture.md), and [learning backlog](docs/learning-backlog.md).
 
 ## Research Method
 
@@ -123,6 +124,7 @@ The web interface opens at `http://127.0.0.1:8765` while the server is running; 
 - [x] Build and test the deterministic synthetic-alert baseline.
 - [x] Add a simulation-only tool gateway and exact-action approval demonstration.
 - [x] Add a localhost participant walkthrough and in-memory reset.
+- [x] Add deterministic attack-and-defend replay checks.
 - [ ] Add authenticated participants and persistent audit only if pilot requirements justify them.
 - [ ] Finalize the implementation report and executive recommendations.
 

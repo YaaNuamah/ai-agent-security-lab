@@ -30,7 +30,7 @@ This backlog is ordered to produce a working, testable agent increment before ad
 
 **B11 Build the participant interface — local walkthrough implemented.** Show alert, evidence, recommendation, policy decision, and audit timeline. Learn usable security explanations. The current interface is localhost-only and single-user; pilot validation with beginners remains to be done.
 
-**B12 Add attack-and-defend replay.** Test injected instructions, malformed indicators, duplicate events, missing evidence, and tool misuse. Learn threat modelling and regression tests. Done when the legitimate task still works while unsafe actions stay blocked.
+**B12 Add attack-and-defend replay — deterministic checks implemented.** Test injected instructions, malformed indicators, duplicate events, missing evidence, and tool misuse. Learn threat modelling and regression tests. The five protected-workflow checks pass; participant comprehension and any future LLM behavior remain untested.
 
 ## Milestone 4 Optional AI layer and pilot
 

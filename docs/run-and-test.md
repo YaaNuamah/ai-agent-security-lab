@@ -54,6 +54,8 @@ python3 -m cyber_agent.web
 
 Open `http://127.0.0.1:8765` in a browser on the same computer. Choose a synthetic case and select **Load synthetic case**. For the suspicious or injection case, continue through **Propose simulation**, **Approve demo request**, and **Run simulation**. Compare the evidence, policy decision, and audit timeline at each step. The inconclusive case stops before approval because its policy is `recommend_only`.
 
+After loading a case, select **Run safety replay** to see five attack-and-defend checks. Each row shows a counterfactual risk, the observed protected result, and the control being exercised. See the [attack replay guide](attack-replay-guide.md) to interpret the results. The replay does not run an unsafe agent or test an LLM.
+
 The server listens on your computer's loopback interface only. It has no external network calls or real security tools. It is a single-user teaching interface: the approver label is not authenticated and its state disappears when you stop the server. Press `Ctrl+C` in Terminal to stop it. If port 8765 is in use, run `python3 -m cyber_agent.web --port 8766` and open `http://127.0.0.1:8766` instead.
 
 ## Run all automated tests
