@@ -24,9 +24,9 @@ This backlog is ordered to produce a working, testable agent increment before ad
 
 ## Milestone 3 Secure interactive lab
 
-**B09 Add a simulation-only gateway.** Allow only narrow, typed mock actions. Learn tool contracts and least privilege. Done when arbitrary commands and unknown tools are rejected.
+**B09 Add a simulation-only gateway — implemented.** Allow only narrow, typed mock actions. Learn tool contracts and least privilege. Tests reject unknown tools; the gateway has no external connector.
 
-**B10 Add exact-action approval.** Bind an approver decision to tool name, parameters, event ID, and expiry. Learn authorization and time-of-check/time-of-use risks. Done when changed or expired requests are denied.
+**B10 Add exact-action approval — lab demonstration implemented.** Bind a local approval token to tool name, parameters, event ID, and expiry. Tests deny changed or expired requests and replay. Authentication, role checks, and durable approval are not implemented; the demo approver name is a label only.
 
 **B11 Build the participant interface.** Show alert, evidence, recommendation, policy decision, and audit timeline. Learn usable security explanations. Done when a beginner can identify why an action was allowed or denied.
 

@@ -52,12 +52,13 @@ See [Source Context and Project Interpretation](docs/source-context.md) for the 
 ```text
 ai-agent-security-lab/
 ├── README.md
-├── cyber_agent/                # Offline deterministic baseline
+├── cyber_agent/                # Offline triage and simulation gateway
 ├── fixtures/                   # Synthetic documentation-only data
 ├── tests/                      # Standard-library unit tests
 ├── docs/
 │   ├── build-architecture.md
 │   ├── learning-backlog.md
+│   ├── run-and-test.md
 │   ├── implementation-report.md
 │   ├── project-scope.md
 │   ├── research-log.md
@@ -72,17 +73,18 @@ ai-agent-security-lab/
 
 ## Run the first prototype
 
-The first milestone is a deterministic suspicious-IP triage agent. It has no LLM, network calls, credentials, or state-changing tools. Its input is a structured synthetic alert; the free-text description is untrusted context and cannot authorize an action.
+The prototype contains deterministic suspicious-IP triage and a simulation-only approval gateway. It has no LLM, network calls, credentials, or real state-changing tools. Its input is a structured synthetic alert; the free-text description is untrusted context and cannot authorize an action.
 
 From this repository directory, run:
 
 ```bash
 python3 -m cyber_agent fixtures/alert-suspicious.json
 python3 -m cyber_agent fixtures/alert-injection.json
+python3 -m cyber_agent.demo
 python3 -m unittest discover -s tests -v
 ```
 
-The suspicious and injection cases should both produce `approval_required` and `action_executed: false`. This is an approval *classification*, not an implemented approval workflow or a firewall action. The prototype currently records an in-memory development audit trace; it is not a production audit system. See [the build architecture](docs/build-architecture.md) and [learning backlog](docs/learning-backlog.md) for boundaries and next steps.
+The suspicious and injection cases should both produce `approval_required` and `action_executed: false`. The demo then shows a local approval and a **simulated** outcome, never a firewall action. The approver label is not authenticated, and the audit trace is in memory; neither is a production security control. See the [run and test guide](docs/run-and-test.md), [build architecture](docs/build-architecture.md), and [learning backlog](docs/learning-backlog.md).
 
 ## Research Method
 
@@ -118,7 +120,8 @@ The suspicious and injection cases should both produce `approval_required` and `
 - [x] Complete future-development roadmap, consolidated references, and executive summary.
 - [ ] Validate the design with venue, budget, legal, and organizer inputs.
 - [x] Build and test the deterministic synthetic-alert baseline.
-- [ ] Add simulation-only tool gateway, exact-action approval, and participant interface.
+- [x] Add a simulation-only tool gateway and exact-action approval demonstration.
+- [ ] Add an authenticated participant interface, persistent audit, and reset flow.
 - [ ] Finalize the implementation report and executive recommendations.
 
 ## Publication Note

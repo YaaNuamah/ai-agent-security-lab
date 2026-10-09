@@ -58,9 +58,15 @@ An audit event in this milestone is a development trace, **not** tamper-resistan
 
 These are demonstration rules, not incident-response thresholds. The team should adjust them only after specifying the learning objective and expected outcomes for each case.
 
+## Second milestone simulation gateway
+
+The gateway accepts only `simulate_block_ip` for a previously triaged, eligible event. It binds a request to event ID, tool, indicator, and duration; a local demo approval yields a one-time token valid for five minutes. Execution rechecks the request and current policy, then returns `status: simulated` without calling any real system. Tests cover changed parameters, expiry, replay, unknown tools, and ineligible events.
+
+The demo approver is a text label, **not** an authenticated person. Tokens and audit entries exist only in process memory. A real multi-user deployment would need authenticated identities, role checks, durable transactions, audit integrity, and an approval service that cannot be bypassed by the same operator.
+
 ## Next boundary before an LLM
 
-Add a simulation-only tool gateway, exact-parameter approval, persistent audit storage, and a reset operation. Test malformed parameters, expired or mismatched approval, duplicate events, unavailable evidence, and injection text. Only then add a model adapter that can be replaced with a recorded-response adapter for offline use. No live security integration is part of the event prototype.
+Add a participant interface, persistent audit storage, and a reset operation. Test unavailable evidence and the full attack-and-defend replay. Only then add a model adapter that can be replaced with a recorded-response adapter for offline use. No live security integration is part of the event prototype.
 
 ## Definition of done for this milestone
 

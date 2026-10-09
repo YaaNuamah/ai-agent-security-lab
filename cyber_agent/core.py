@@ -109,6 +109,11 @@ class Agent:
     def audit(self) -> tuple[dict[str, Any], ...]:
         return tuple(deepcopy(entry) for entry in self._audit)
 
+    def result_for(self, event_id: str) -> dict[str, Any] | None:
+        """Return a copy of a prior decision for the local simulation gateway."""
+        result = self._results.get(event_id)
+        return deepcopy(result) if result is not None else None
+
     def process(self, raw_alert: Mapping[str, Any]) -> dict[str, Any]:
         alert = Alert.parse(raw_alert)
         if alert.event_id in self._results:
