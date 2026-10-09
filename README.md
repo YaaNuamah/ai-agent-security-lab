@@ -60,6 +60,7 @@ ai-agent-security-lab/
 │   ├── attack-replay-guide.md
 │   ├── learning-backlog.md
 │   ├── run-and-test.md
+│   ├── teammate-pilot-guide.md
 │   ├── implementation-report.md
 │   ├── project-scope.md
 │   ├── research-log.md
@@ -87,6 +88,8 @@ python3 -m unittest discover -s tests -v
 ```
 
 The web interface opens at `http://127.0.0.1:8765` while the server is running; press `Ctrl+C` to stop it. The suspicious and injection cases both produce `approval_required` and `action_executed: false`. A saved assessment is displayed as advisory text. In the inconclusive case it intentionally suggests a block review, but the independent policy remains `recommend_only`. The walkthrough shows a local approval and a **simulated** outcome, never a firewall action. **Run safety replay** exercises six fictional failure cases against the protected workflow. The approver label is not authenticated, and the audit trace is in memory; neither is a production security control. See the [run and test guide](docs/run-and-test.md), [attack replay guide](docs/attack-replay-guide.md), [build architecture](docs/build-architecture.md), and [learning backlog](docs/learning-backlog.md).
+
+Sharing the localhost URL will not open the lab on someone else's computer. For a hands-on teammate test, send the [teammate pilot guide](docs/teammate-pilot-guide.md); for a quick demonstration, share your screen.
 
 ## Research Method
 
