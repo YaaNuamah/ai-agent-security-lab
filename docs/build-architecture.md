@@ -66,7 +66,7 @@ The demo approver is a text label, **not** an authenticated person. Tokens and a
 
 ## Next boundary before an LLM
 
-Add a participant interface, persistent audit storage, and a reset operation. Test unavailable evidence and the full attack-and-defend replay. Only then add a model adapter that can be replaced with a recorded-response adapter for offline use. No live security integration is part of the event prototype.
+A single-user localhost participant interface now shows alert, evidence, decision, local approval, simulated result, and audit timeline. It can reset its in-memory session. This is a teaching interface, not authenticated multi-user software. Next add persistent audit storage only if needed for the pilot, and a full attack-and-defend replay. Test unavailable evidence. Only then add a model adapter that can be replaced with a recorded-response adapter for offline use. No live security integration is part of the event prototype.
 
 ## Definition of done for this milestone
 

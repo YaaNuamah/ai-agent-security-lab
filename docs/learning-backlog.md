@@ -28,7 +28,7 @@ This backlog is ordered to produce a working, testable agent increment before ad
 
 **B10 Add exact-action approval — lab demonstration implemented.** Bind a local approval token to tool name, parameters, event ID, and expiry. Tests deny changed or expired requests and replay. Authentication, role checks, and durable approval are not implemented; the demo approver name is a label only.
 
-**B11 Build the participant interface.** Show alert, evidence, recommendation, policy decision, and audit timeline. Learn usable security explanations. Done when a beginner can identify why an action was allowed or denied.
+**B11 Build the participant interface — local walkthrough implemented.** Show alert, evidence, recommendation, policy decision, and audit timeline. Learn usable security explanations. The current interface is localhost-only and single-user; pilot validation with beginners remains to be done.
 
 **B12 Add attack-and-defend replay.** Test injected instructions, malformed indicators, duplicate events, missing evidence, and tool misuse. Learn threat modelling and regression tests. Done when the legitimate task still works while unsafe actions stay blocked.
 

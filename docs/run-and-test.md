@@ -44,13 +44,25 @@ python3 -m cyber_agent.demo
 
 Read the output in order: `triage`, `simulated_outcome`, then `gateway_audit`. The demo creates an approval token internally to show the control flow. The result must say `status: simulated` and `real_action_executed: false`. The displayed `demo_analyst` is a label, not a login or authenticated approver.
 
+## Use the participant-facing interface
+
+From the repository directory, start the local server:
+
+```bash
+python3 -m cyber_agent.web
+```
+
+Open `http://127.0.0.1:8765` in a browser on the same computer. Choose a synthetic case and select **Load synthetic case**. For the suspicious or injection case, continue through **Propose simulation**, **Approve demo request**, and **Run simulation**. Compare the evidence, policy decision, and audit timeline at each step. The inconclusive case stops before approval because its policy is `recommend_only`.
+
+The server listens on your computer's loopback interface only. It has no external network calls or real security tools. It is a single-user teaching interface: the approver label is not authenticated and its state disappears when you stop the server. Press `Ctrl+C` in Terminal to stop it. If port 8765 is in use, run `python3 -m cyber_agent.web --port 8766` and open `http://127.0.0.1:8766` instead.
+
 ## Run all automated tests
 
 ```bash
 python3 -m unittest discover -s tests -v
 ```
 
-The tests should finish with `OK`. They cover input validation, untrusted description text, no-evidence handling, duplicate events, exact-parameter approval, expiry, replay, and unknown tools. If Python says `No module named cyber_agent`, run `pwd` and return to the repository directory. If a test fails, keep the full failure output and inspect the named test before changing code.
+The tests should finish with `OK`. They cover input validation, untrusted description text, no-evidence handling, duplicate events, exact-parameter approval, expiry, replay, unknown tools, HTML escaping, cross-origin form rejection, and the web walkthrough. If Python says `No module named cyber_agent`, run `pwd` and return to the repository directory. If a test fails, keep the full failure output and inspect the named test before changing code.
 
 ## Learning exercise
 

@@ -81,10 +81,11 @@ From this repository directory, run:
 python3 -m cyber_agent fixtures/alert-suspicious.json
 python3 -m cyber_agent fixtures/alert-injection.json
 python3 -m cyber_agent.demo
+python3 -m cyber_agent.web
 python3 -m unittest discover -s tests -v
 ```
 
-The suspicious and injection cases should both produce `approval_required` and `action_executed: false`. The demo then shows a local approval and a **simulated** outcome, never a firewall action. The approver label is not authenticated, and the audit trace is in memory; neither is a production security control. See the [run and test guide](docs/run-and-test.md), [build architecture](docs/build-architecture.md), and [learning backlog](docs/learning-backlog.md).
+The web interface opens at `http://127.0.0.1:8765` while the server is running; press `Ctrl+C` to stop it. The suspicious and injection cases both produce `approval_required` and `action_executed: false`. The walkthrough shows a local approval and a **simulated** outcome, never a firewall action. The approver label is not authenticated, and the audit trace is in memory; neither is a production security control. See the [run and test guide](docs/run-and-test.md), [build architecture](docs/build-architecture.md), and [learning backlog](docs/learning-backlog.md).
 
 ## Research Method
 
@@ -121,7 +122,8 @@ The suspicious and injection cases should both produce `approval_required` and `
 - [ ] Validate the design with venue, budget, legal, and organizer inputs.
 - [x] Build and test the deterministic synthetic-alert baseline.
 - [x] Add a simulation-only tool gateway and exact-action approval demonstration.
-- [ ] Add an authenticated participant interface, persistent audit, and reset flow.
+- [x] Add a localhost participant walkthrough and in-memory reset.
+- [ ] Add authenticated participants and persistent audit only if pilot requirements justify them.
 - [ ] Finalize the implementation report and executive recommendations.
 
 ## Publication Note
